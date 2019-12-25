@@ -1,70 +1,71 @@
 <template>
-  <div>
-    <AddTodo v-on:add-todo="addTodo" />
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+  <div id="app">
+    <header>
+        <router-link to="/"><img src="https://www.freeiconspng.com/uploads/tasks-icon-32.png" alt="tasker" /></router-link>
+      <div id="nav">
+        <router-link to="/">Home</router-link> 
+        <router-link to="/about">About </router-link>
+        <router-link to="/todoList">Todo List</router-link>
+      </div>
+    </header>
+    <router-view/>
   </div>
 </template>
 
-<script>
-import Todos from "./components/Todos";
-import AddTodo from "./components/AddTodo";
-import axios from "axios";
-export default {
-  name: "app",
-  components: {
-    Todos,
-    AddTodo
-  },
-  data() {
-    return {
-      todos: [],
-      errors:{},
-      response:{}
-    };
-  },
-  methods: {
-    deleteTodo(id) {
-      axios.delete("https://jsonplaceholder.typicode.com/todos/"+id)
-           .then(res => {
-         // console.log(res);
-         this.response = res;
-          this.todos = this.todos.filter(todo => todo.id !== id)
-          })
-           .catch(err => this.errors = err);
-      this.todos = this.todos.filter(todo => todo.id !== id);
-    },
-    addTodo(newTodo) {
-      const { title, completed } = newTodo;
-      axios.post("https://jsonplaceholder.typicode.com/todos",{
-        title,
-        completed
-        })
-        .then(res => {
-          this.response = res;
-        //  console.log(res);
-          this.todos = [...this.todos, newTodo]
-          })
-        .catch(err => this.errors = err);
-    }
-  },
-  created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then(res => this.todos = res.data)
-      .catch(err => this.errors = err );
-  }
-};
-</script>
-* {
-box-sizing:border-box;
-margin:0;
-padding: 0;
-}
-body {
-font-family:Arial, Helvetica, sans-serif;
+<style>
+body{
+  padding:0;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
 line-height:1.4;
 }
 
-<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+header{
+   position: fixed;
+  top: 0;
+  width: 100%;
+  background-color:rgba(113, 8, 139, 0.986);
+   display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 50px 0 50px;
+  height:8vh;
+}
+#nav {
+  /* padding: 30px; */
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+  align-items: center;
+  width:40vw;
+  padding: 0 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+header a img{
+  height:5vh;
+  width:4vw;
+}
+#nav a {
+  color: white;
+  text-decoration:none;
+}
+#nav a:hover{
+  background-color:whitesmoke;
+  border:1px solid whitesmoke;
+  color:black;
+  border-radius:5px;
+}
+/* .router-link-exact-active */
 </style>

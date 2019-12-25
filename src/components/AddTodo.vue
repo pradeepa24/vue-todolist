@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form @submit="addTodo">
+  <div class="add-form">
+    <form  @submit="addTodo">
       <input type="text" name="title" placeholder="Add Todo.." v-model="title"/>
       <input type="submit" value="Submit" class="btn" />
     </form>
@@ -30,8 +30,15 @@ export default {
 };
 </script>
 <style scoped>
+.add-form{
+  padding:20px;
+  width:100vw;
+}
 form {
   display: flex;
+  height:10vh;
+  padding:10px;
+  width:100%;
 }
 .btn {
   display: inline-block;
@@ -42,13 +49,22 @@ form {
   cursor: pointer;
 }
 .btn:hover {
-  background: #666;
+ background-color:white;
+  color:rgba(113, 8, 139, 0.986);
 }
 input[type="text"] {
+  height:5vh;
   flex: 10;
   padding: 5px;
+  border-top-left-radius:8px;
+  border-bottom-left-radius:8px;
 }
 input[type="submit"] {
   flex: 2;
+  height:6.55vh;
+   border-top-right-radius:8px;
+  border-bottom-right-radius:8px;
+   background-color:rgba(113, 8, 139, 0.986);
+    border:solid 1px rgba(113, 8, 139, 0.986);
 }
 </style>

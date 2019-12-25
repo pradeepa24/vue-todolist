@@ -23,6 +23,7 @@ export default {
     background:#f4f4f4;
     padding:10px;
     border-bottom:1px #ccc dotted;
+    width:100vw;
     }
     .is-complete{
         text-decoration: line-through;
@@ -35,5 +36,8 @@ export default {
         border-radius:50%;
         cursor: pointer;
         float:right;
+        }
+        p{
+            padding:0 10px;
         }
 </style>
